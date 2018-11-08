@@ -49,7 +49,7 @@ class STDP(Connection):
         post_traces = self.post.get_traces()
         post_spikes = self.post.get_spikes()
 
-        dw = self.nu_post * pre_traces.view(-1, 1) * post_spikes.view(1, -1)   # LTP
+        dw = self.nu_post * pre_traces.view(-1, 1) * post_spikes.view(1, -1)  # LTP
         dw -= self.nu_pre * pre_spikes.view(-1, 1) * post_traces.view(1, -1)  # LTD
 
         self.w = torch.clamp(self.w + self.nu * dw, 0, self.limit)
